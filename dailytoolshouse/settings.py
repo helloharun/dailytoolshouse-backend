@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-se)1820me%s6_j9**iv7&n-l8j9w3y#o9m$h=7@mulcl5$es&3
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     'http://localhost:3000',
     'https://dailytoolsbackend.herokuapp.com/',
 ]
@@ -135,10 +136,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # ADDED
-STATIC_ROOT = BASE_DIR / 'collected-static'
+STATIC_ROOT = BASE_DIR/'collected-static'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'collected-media'
+MEDIA_ROOT = BASE_DIR/'collected-media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -196,7 +197,7 @@ SIMPLE_JWT = {
 # CORS
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'dailytoolsbackend.herokuapp.com',
+    'http://127.0.0.1:8000',
 ] 
 
 # AUTH ACCOUNT MODEL
