@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'http://localhost:3000',
-    'dailytoolsbackend.herokuapp.com',
+    'https://dailytoolsbackend.herokuapp.com/',
 ]
 
 
