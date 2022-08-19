@@ -134,11 +134,6 @@ STATIC_URL = '/static/'
 # ADDED
 STATIC_ROOT = BASE_DIR / 'collected-static'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, 'static'),
-]
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'collected-media'
 
