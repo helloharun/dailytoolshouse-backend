@@ -24,9 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-se)1820me%s6_j9**iv7&n-l8j9w3y#o9m$h=7@mulcl5$es&3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'http://localhost:3000',
+    'dailytoolsbackend.herokuapp.com',
+]
 
 
 # Application definition
@@ -193,6 +196,7 @@ SIMPLE_JWT = {
 # CORS
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'dailytoolsbackend.herokuapp.com',
 ] 
 
 # AUTH ACCOUNT MODEL
