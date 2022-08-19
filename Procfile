@@ -1,1 +1,1 @@
-web: gunicorn dailytoolshousebackend.wsgi --log-file -
+web: gunicorn dailytoolshouse.wsgi --log-file -
