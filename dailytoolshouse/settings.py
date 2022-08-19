@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -190,3 +191,6 @@ CORS_ALLOWED_ORIGINS = [
 
 # AUTH ACCOUNT MODEL
 AUTH_USER_MODEL = 'account.Account'
+
+# forever-cacheable files and compression support
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
