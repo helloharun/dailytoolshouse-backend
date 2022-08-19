@@ -28,8 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'http://localhost:3000',
-    'https://dailytoolsbackend.herokuapp.com/',
+    'localhost:3000',
+    'dailytoolsbackend.herokuapp.com',
 ]
 
 
