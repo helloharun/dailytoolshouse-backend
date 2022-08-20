@@ -89,10 +89,34 @@ WSGI_APPLICATION = 'dailytoolshouse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# for local host
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dailytoolshouse',
+#         'USER': 'admin',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
+# for live
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd6atmrgsslmr6j',
+        'USER': 'myebhokjojuotu',
+        'PASSWORD': 'decdc20bd241a14f2c5f793278b6a42f5bc88a0771008b54de9ac563e064aa98',
+        'HOST': 'ec2-34-203-182-65.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
