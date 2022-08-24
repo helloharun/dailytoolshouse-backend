@@ -112,10 +112,10 @@ WSGI_APPLICATION = 'dailytoolshouse.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd6atmrgsslmr6j',
-        'USER': 'myebhokjojuotu',
-        'PASSWORD': 'decdc20bd241a14f2c5f793278b6a42f5bc88a0771008b54de9ac563e064aa98',
-        'HOST': 'ec2-34-203-182-65.compute-1.amazonaws.com',
+        'NAME': 'ddlf2lab34ptam',
+        'USER': 'xkgueeobyjzwwk',
+        'PASSWORD': 'b8c61221f977ac6691c5946016ffa5f25916332a57e1c83eaa993f042c7338ee',
+        'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -180,7 +180,7 @@ REST_FRAMEWORK = {
         # 'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '2/minute',
+        'anon': '50/minute',
         'user': '3/minute'
     }
 }
