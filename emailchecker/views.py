@@ -27,6 +27,9 @@ class EmailChecker(APIMixin, APIView):
          return self.error_response({
                   'msg':f'{e} missing'
                })
+      responses = {
+
+      }
       try:
          is_valid = validate_email_or_fail(
          email_address=email_id,
@@ -42,15 +45,14 @@ class EmailChecker(APIMixin, APIView):
          smtp_tls_context=None,
          smtp_debug=False
          )
-
+         print('is_valid:::::::::', is_valid)
          if is_valid:
-            return self.success_response({
-               'msg':'valid'
-            })
+            responses['msg'] = 'Valid email'
+            responses['status'] = 200
       except Exception as e:
-         return self.error_response({
-                  'msg':f'{e}'
-               })
+         responses['msg'] = f'{e}'
+         responses['status'] = 400
+      return Response(responses)
 
    def throttled(self, request, wait):
       print(request)
