@@ -97,28 +97,28 @@ WSGI_APPLICATION = 'dailytoolshouse.wsgi.application'
 # }
 
 # for local host
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dailytoolshouse',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-
-# for live
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'ddlf2lab34ptam',
-#         'USER': 'xkgueeobyjzwwk',
-#         'PASSWORD': 'b8c61221f977ac6691c5946016ffa5f25916332a57e1c83eaa993f042c7338ee',
-#         'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',
-#         'PORT': '5432',
+#         'NAME': 'dailytoolshouse',
+#         'USER': 'admin',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         'PORT': '',
 #     }
 # }
+
+# for live
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ddlf2lab34ptam',
+        'USER': 'xkgueeobyjzwwk',
+        'PASSWORD': 'b8c61221f977ac6691c5946016ffa5f25916332a57e1c83eaa993f042c7338ee',
+        'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
