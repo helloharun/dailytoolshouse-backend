@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from datetime import time, timedelta
+from django.contrib.messages import constants as messages
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +54,8 @@ INSTALLED_APPS = [
     'helpers',
     'account',
     'tpauth',
+    'pwgenerator',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +75,7 @@ ROOT_URLCONF = 'dailytoolshouse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,12 +94,12 @@ WSGI_APPLICATION = 'dailytoolshouse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # for local host
 # DATABASES = {
@@ -109,16 +114,28 @@ WSGI_APPLICATION = 'dailytoolshouse.wsgi.application'
 # }
 
 # for live
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ddlf2lab34ptam',
-        'USER': 'xkgueeobyjzwwk',
-        'PASSWORD': 'b8c61221f977ac6691c5946016ffa5f25916332a57e1c83eaa993f042c7338ee',
-        'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'ddlf2lab34ptam',
+#         'USER': 'xkgueeobyjzwwk',
+#         'PASSWORD': 'b8c61221f977ac6691c5946016ffa5f25916332a57e1c83eaa993f042c7338ee',
+#         'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
+# for testing/live
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'yufjzfsi_dailytoolsdb',
+#         'USER': 'admin',
+#         'PASSWORD': 'yufjzfsi_admin',
+#         'HOST': '95.217.65.82',   # Or an IP Address that your DB is hosted on
+#         'PORT': '2083',
+#     }
+# }
 
 
 # Password validation
@@ -230,3 +247,23 @@ AUTH_USER_MODEL = 'account.Account'
 
 # forever-cacheable files and compression support
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# Statis files
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+
+
+# messages
+MESSAGE_LEVEL = messages.DEBUG
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

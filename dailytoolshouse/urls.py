@@ -22,6 +22,14 @@ urlpatterns = [
     path('email-checker/', include('emailchecker.urls')),
     path('video-downloader/', include('videodownloder.urls')),
     path('url-shortner/', include('urlshortner.urls')),
-    path('<str:key>', URLRedirect, name="url-filter"),
-    path('tpauth/', include('tpauth.urls'))
+    # path('<str:key>', URLRedirect, name="url-filter"),
+    path('tpauth/', include('tpauth.urls')),
+    
+    # for Home Page
+    path('', include('home.urls')),
+
+    # for Password generator
+    path('pwgenerator/', include("pwgenerator.urls"))
+
+
 ]
