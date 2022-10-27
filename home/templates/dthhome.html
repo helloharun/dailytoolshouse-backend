@@ -1,4 +1,5 @@
 {% include '_base.html' %}
+{% load static %}
 {% block title %}
 <title>DailyToolsHouse | Home</title>
 {% endblock title %}
@@ -25,7 +26,7 @@
       {% for item in data %}
       <div class="col-md-4 mt-3">
          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="{% static item.image_url%}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{item.service_name}}</h5>
               <p class="card-text">{{item.description|truncatewords:13}}</p>
