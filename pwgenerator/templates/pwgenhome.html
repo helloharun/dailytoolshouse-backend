@@ -1,0 +1,152 @@
+{% load static %}
+{% include '_base.html' %}
+
+{% block title %}
+  <title>Password Generator | Home</title>
+{% endblock title %}
+
+{% comment %} navbar {% endcomment %}
+{% include '_navbar.html' %}
+<!--End of Navbar-->
+
+{% block content %}
+  <div class="container my-4">
+    <form action="" method="post">
+      {% csrf_token %}
+    
+      <h1>Welcome to Password Generator</h1>
+
+    <div style="background: #efebe9" class="p-4">
+      <p>Components for password generation</p>
+      
+      <div class="row">
+      <!--beginning of Basic Components-->
+      <div class="col-md-6">
+      <b>
+        <p style="background: #d7ccc8" class="text-center py-1">Basic</p>
+      </b>      
+
+      <div class="form-check py-3">
+        <div class="row">
+          <div class="col-md-4">
+            <input name="capLetter" class="form-check-input" type="checkbox" value="True" id="cap-letter" checked="checked">
+            <label class="form-check-label" for="flexCheckDefault">
+              ABC
+            </label>
+          </div>
+
+          <div class="col-md-4">
+            <input name="smallLetter" class="form-check-input" type="checkbox" value="True" id="small-letter" checked="checked">
+            <label class="form-check-label" for="flexCheckChecked">
+              abc
+            </label>
+          </div>
+
+          <div class="col-md-4">
+            <input name="digits" class="form-check-input" type="checkbox" value="True" id="digits" checked="checked">
+            <label class="form-check-label" for="flexCheckChecked">
+              123
+            </label>
+          </div>
+        </div>
+        <!--end of row-->
+      </div>
+      <!--end of form-check-->
+    </div>       <!--End of basic Components-->
+
+      <!--Beginning of Advanced Components-->
+      <div class="col-md-6">
+
+      <b>
+        <p style="background: #d7ccc8" class="text-center py-1">Advanced</p>
+      </b>
+
+      <div class="form-check py-3">
+        <div class="row">
+          <div class="col-md-4">
+            <input name="specialChars" class="form-check-input" type="checkbox" value="True" id="special-chars">
+            <label class="form-check-label" for="flexCheckDefault">
+              ABCSpecial symbols (e.g. @#$%)
+            </label>
+          </div>
+
+          <div class="col-md-4">
+            <input name="similarChars" class="form-check-input" type="checkbox" value="True" id="similar-chars">
+            <label class="form-check-label" for="flexCheckChecked">
+              Similar letters (e.g. i,l,1,L,o,0,O)
+            </label>
+          </div>
+
+          <div class="col-md-4">
+            <input name="beginWithALetter" class="form-check-input" type="checkbox" value="True" id="begin-with-a-letter">
+            <label class="form-check-label" for="flexCheckChecked">
+              Begin with a letterrange
+            </label>
+          </div>
+
+          <div class="col-md-4">
+            <input name="removeDuplicateLetter" class="form-check-input" type="checkbox" value="True" id="remove-duplicate-letter">
+            <label class="form-check-label" for="flexCheckChecked">
+              Remove duplicate letters
+            </label>
+          </div>
+
+          <div class="col-md-4">
+            <input name="removeSequentialLetters" class="form-check-input" type="checkbox" value="True" id="remove-sequential-letters">
+            <label class="form-check-label" for="flexCheckChecked">
+              Remove Sequential letters
+            </label>
+          </div>
+
+        </div>
+        <!--end of row-->
+      </div>
+      <!--end of form-check-->
+    </div> <!--End of advanced Components-->
+
+      </div> <!--End of Components-->
+
+      <!--Password length-->
+      <label for="customRange2" class="form-label">Password Length <span id="passwordLengthDisplay"></span></label>
+      <input type="range" class="form-range" min="8" max="50" id="passwordLengthRange" data-bs-toggle="tooltip" data-bs-placement="top" title="Length of password" onchange="passwordLengthRangeNoticer()" value="10" name="passwordLength">
+      <!--End of password length-->
+
+      <!--Notice -->
+      <p style="background:#ef9a9a;font-size:15px" class="p-3 my-3">
+        <i>Notes: Password length till 1name="passwordLength"5 is considered as weak password so always use more than 15 password length to secure your password</i>
+      </p>
+      <!--Notice ends -->
+
+    </div> <!--end of Components-->
+
+
+   {% comment %} for generator button {% endcomment %}
+   <div class="row">
+      {% comment %} <div class="col-md-9">
+         <div class="input-group my-3">
+            <input type="text" class="form-control" placeholder="Your generated password" aria-label="Your generated password" aria-describedby="button-addon2" readonly value="" id="generatedPassword">
+            <button class="btn btn-primary" type="button" id="button-addon2" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy generated password">Copy</button>
+          </div>
+      </div> {% endcomment %}
+      <div class="col-md-3">
+         <button type="submit" class="btn btn-outline-primary my-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to generate password" id="generatePassword" value={{generated_password}}>Generate Password</button>
+         {% comment %} <button type="button" class="btn btn-outline-primary my-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to generate password" id="generatePassword">Generate Password</button> {% endcomment %}
+         
+      </div>
+
+   </div> <!--End of generator button-->
+  </form> 
+  <div class="row">
+    <div class="col-md-9">
+       <div class="input-group">
+          <input id="generatedPassword" type="text" class="form-control" placeholder="Your generated password" aria-label="Your generated password" aria-describedby="button-addon2" readonly value={{pw}}>
+
+          <button id="copy-generated-password" class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy generated password" onclick="passwordCopier()">Copy</button>
+        </div>
+    </div>
+  </div>
+  </div>
+{% endblock content %}
+{% block script %}
+<script src="{%  static 'js/pwgenerator/pwgenerator.js' %}"></script>
+{% endblock script %}
