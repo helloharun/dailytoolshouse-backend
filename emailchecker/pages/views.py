@@ -1,4 +1,3 @@
-from os import access
 from django.shortcuts import render, HttpResponse
 from emailchecker.views import EmailChecker
 import requests
@@ -6,7 +5,7 @@ from django.views import View
 from django.http import JsonResponse
 import json
 from django.contrib import messages
-
+from django.conf import settings
 
 class EmailCheckerHome(View):
    # Global variables
@@ -14,10 +13,11 @@ class EmailCheckerHome(View):
    
    @property
    def get_access_token(self):
-      url = 'http://127.0.0.1:8000/tpauth/get_token/'
+
+      url = settings.EMAIL_CHECKER_ACCESS_TOKEN_URL
       payload = {
-         'email':'test@dailytoolshouse.com',
-         'password':'asdf@123'
+         'email':settings.USER_EMAIL,
+         'password':settings.USER_PASSWORD
       }
       res = requests.post(url, data=payload)
       
@@ -34,13 +34,22 @@ class EmailCheckerHome(View):
       self.get_access_token
       return render(request, 'email-checker-home.html')
 
-   def post(self, request):
-      access_token = self.access_tokens['data']['access']
-      
-      raw_email = request.POST.get('raw-email')
-      
-      url = 'http://127.0.0.1:8000/email-checker/checker/'
+   def validate_raw_email(self, raw_email):
+      # initializing access_token variable
+      access_token = ''
 
+      try:
+         access_token = self.access_tokens['data']['access']
+      except:
+         self.get_access_token
+         
+      if access_token == '':
+         self.get_access_token
+      
+      # email checker API end point
+      url = settings.EMAIL_CHECKER_URL
+
+      # Data
       headers = {
          'Authorization': f'Bearer {access_token}',
       }
@@ -49,14 +58,35 @@ class EmailCheckerHome(View):
          'email_id':raw_email
       }
 
-
-      res = requests.post(url, data=payload, headers=headers)
+      try:
+         res = requests.post(url, data=payload, headers=headers)
+      except Exception as e:
+         print("error:", e)
       
       parsed_email_response = json.loads(res.content.decode())
-      if str(parsed_email_response['status']) == '200':
-         messages.success(request, parsed_email_response['msg'], extra_tags='Congratulations!')
-      elif str(parsed_email_response['status']) == '400':
-         messages.error(request, parsed_email_response['msg'], extra_tags='Oops!')
+      return JsonResponse({'data': parsed_email_response},safe=False)
+
+
+   def post(self, request):
+      # catch email from post request
+      raw_email = request.POST.get('raw-email')
+
+      # calling validation_response method for email validation
+      validation_response = self.validate_raw_email(raw_email)
+      
+      # parsing the response
+      parsed_validation_response = json.loads(validation_response.content.decode())
+
+      try:
+         if str(parsed_validation_response['data']['status']) == '200':
+            messages.success(request, parsed_validation_response['data']['msg'], extra_tags='Congratulations!')
+         elif str(parsed_validation_response['data']['status']) == '400':
+            messages.error(request, parsed_validation_response['data']['msg'], extra_tags='Oops!')
+         else:
+            messages.error(request, parsed_validation_response['data']['msg'], extra_tags='Error!')
+      except Exception as e:
+         if parsed_validation_response['data']['code'] == 'token_not_valid':
+            return self.get(request)
 
       # return HttpResponse("Email Checker Home")
       return render(request, 'email-checker-home.html')
