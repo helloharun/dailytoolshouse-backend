@@ -58,8 +58,8 @@ class EmailChecker(APIMixin, APIView):
       print(request)
       raise Throttled(
          detail={
-            "message":"Too many request",
+            "msg":"Too many request!",
             "available_in":f"{wait} seconds",
-            "status_code": status.HTTP_429_TOO_MANY_REQUESTS
+            "status": status.HTTP_429_TOO_MANY_REQUESTS
          }
       )

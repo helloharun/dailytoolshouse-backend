@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+
+from decouple import config
+
 from pathlib import Path
 from datetime import time, timedelta
 from django.contrib.messages import constants as messages
@@ -24,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-se)1820me%s6_j9**iv7&n-l8j9w3y#o9m$h=7@mulcl5$es&3'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -197,14 +200,14 @@ REST_FRAMEWORK = {
         # 'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '50/minute',
-        'user': '50/minute'
+        'anon': '2/minute',
+        'user': '2/minute'
     }
 }
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
     # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
     'ROTATE_REFRESH_TOKENS': False,
@@ -267,3 +270,10 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+
+# Environment Variables
+EMAIL_CHECKER_ACCESS_TOKEN_URL = config('EMAIL_CHECKER_ACCESS_TOKEN_URL')
+EMAIL_CHECKER_URL = config('EMAIL_CHECKER_URL')
+USER_EMAIL = config('USER_EMAIL')
+USER_PASSWORD = config('USER_PASSWORD')

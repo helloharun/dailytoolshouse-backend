@@ -22,7 +22,7 @@ def passwordGenerator(request):
       smallLetter = ["m","n","b","v","c","x","z","k","j","h","g","f","d","s","a","p","y","t","r","e","w","q"]
 
       digits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-      similarAlphaNumeric = ["i", "o", "l", "I", "O", "L", 0, "|"];
+      similarAlphaNumeric = ["i", "o", "l", "I", "O", "L", "0", "|"];
       specialChars = ["!",'"',";","#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","}","~"]
 
       # total available strings
