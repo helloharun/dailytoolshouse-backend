@@ -12,7 +12,7 @@ h2{
    font-family: 'Cabin', sans-serif;
 }
 
-p, button, label{
+p, button, label, ul, li {
    font-family: 'Poppins', sans-serif;
    font-size: larger;
    /* font-weight:100 */

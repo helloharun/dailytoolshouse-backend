@@ -13,7 +13,6 @@ class EmailCheckerHome(View):
    
    @property
    def get_access_token(self):
-
       url = settings.EMAIL_CHECKER_ACCESS_TOKEN_URL
       payload = {
          'email':settings.USER_EMAIL,
@@ -79,11 +78,12 @@ class EmailCheckerHome(View):
 
       try:
          if str(parsed_validation_response['data']['status']) == '200':
-            messages.success(request, parsed_validation_response['data']['msg'], extra_tags='Congratulations!')
+            messages.success(request, {'msg':parsed_validation_response['data']['msg'],'email':raw_email}, extra_tags='Congratulations!')
+            # messages.success(request, parsed_validation_response['data']['msg'], extra_tags={'extra_msg':'Congratulations!','email':raw_email})
          elif str(parsed_validation_response['data']['status']) == '400':
-            messages.error(request, parsed_validation_response['data']['msg'], extra_tags='Oops!')
+            messages.error(request, {'msg':parsed_validation_response['data']['msg'],'email':raw_email}, extra_tags='Oops!')
          else:
-            messages.error(request, parsed_validation_response['data']['msg'], extra_tags='Error!')
+            messages.error(request, {'msg':parsed_validation_response['data']['msg'],'email':raw_email}, extra_tags='Error!')
       except Exception as e:
          if parsed_validation_response['data']['code'] == 'token_not_valid':
             return self.get(request)

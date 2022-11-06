@@ -200,14 +200,14 @@ REST_FRAMEWORK = {
         # 'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '2/minute',
-        'user': '2/minute'
+        'anon': '15/minute',
+        'user': '15/minute'
     }
 }
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
     'ROTATE_REFRESH_TOKENS': False,
@@ -277,3 +277,12 @@ EMAIL_CHECKER_ACCESS_TOKEN_URL = config('EMAIL_CHECKER_ACCESS_TOKEN_URL')
 EMAIL_CHECKER_URL = config('EMAIL_CHECKER_URL')
 USER_EMAIL = config('USER_EMAIL')
 USER_PASSWORD = config('USER_PASSWORD')
+
+
+# extra settings
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 3600 #important. Don't play with this
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
