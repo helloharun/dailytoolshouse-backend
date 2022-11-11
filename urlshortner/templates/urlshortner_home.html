@@ -1,0 +1,81 @@
+{% load static %}
+{% include '_base.html' %}
+
+{% block title %}
+  <title>URL Shortner | Home</title>
+{% endblock title %}
+
+{% include '_navbar.html' %}
+<!--End of Navbar-->
+
+{% block content %}
+  <div class="container" style="margin-top:100px">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Welcome to URL Shortner</h1>
+
+        {% comment %} for messages {% endcomment %}
+        {% for message in messages %}
+        <div
+          class="alert {{message.tags}} alert-dismissible fade show"
+          role="alert"
+        >
+          <p><strong>Status:</strong> {{message.extra_tags}}
+            {{ message.message.msg }}<br>
+            {% if message.message.requested_url %}
+            <strong>Requested URL:</strong> {{message.message.requested_url}} <br>
+            {% endif %}
+            {% if message.message.generated_url %}
+            <strong>Generated URL:</strong> {{message.message.generated_url}}
+            {% endif %}
+        </p>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endfor %}
+
+        {% comment %} logn URL submission {% endcomment %}
+        <div class="border border-3 rounded p-3">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Long URL</label>
+              <input name="long-url" type="text" class="form-control mb-4" id="long_url" placeholder="https://dailytoolshouse.com/url-shortener/" required="required"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        {% comment %} <div class="border border-3 rounded p-3"> {% endcomment %}
+          <div class="my-5" style="font-family: 'Poppins', sans-serif">
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center border border-3">
+                Get long urls shortened in a second.
+                <span class="badge bg-success rounded-pill">New</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center border border-3 border-top-0">
+                Sign up for premium services.
+                <span class="badge bg-success rounded-pill">New</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center border border-3 border-top-0">
+                Get API to integrate it into your system.
+                <span class="badge bg-success rounded-pill">New</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center border border-3 border-top-0">
+                Get long urls shortened in a second with analytics
+                <span class="badge bg-warning rounded-pill">In progress</span>
+              </li>
+            </ul>
+          {% comment %} </div> {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block script %}{% endblock script %}

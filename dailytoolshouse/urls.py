@@ -15,21 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from urlshortner.views import URLRedirect
+from urlshortner.pages import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('email-checker/', include('emailchecker.urls')),
     path('video-downloader/', include('videodownloder.urls')),
     path('url-shortner/', include('urlshortner.urls')),
-    # path('<str:key>', URLRedirect, name="url-filter"),
     path('tpauth/', include('tpauth.urls')),
     
     # for Home Page
     path('', include('home.urls')),
 
     # for Password generator
-    path('pwgenerator/', include("pwgenerator.urls"))
+    path('pwgenerator/', include("pwgenerator.urls")),
+
+    # for checking requested_shortened_url if exists
+    path('<str:url_query>/', views.URLCheck.as_view(), name="client-url-checker"),
+
 
 
 ]
